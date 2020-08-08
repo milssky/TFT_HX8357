@@ -26,9 +26,12 @@ Have fun!
 by milssky
 
 Added methods for constructing a Bezier curve by 2, 3, 4 points.
-Usage 
+Usage:
+
 ```c
 drawCurve2p(int16_t x0, int16_t y0, int16_t x2, int16_t y2, uint16_t color);
 drawCurve3p(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color);
 drawCurve4p(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, int16_t x3, int16_t y3, uint16_t color);
-'''
+```
+
+Good luck!
