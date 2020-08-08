@@ -431,6 +431,67 @@ void TFT_HX8357::init(void)
 #endif
 }
 
+void TFT_HX8357::drawCurve2p(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
+ uint16_t color) {
+	 float x=0;
+   while (x<1) {
+   drawPixel(((1-x)*x0) + (x*x1)  , ((1-x)*y0) + (x*y1) , color);//P = (1-t)P1 + tP2
+   x+=0.1;
+   }
+ }
+//curve 3 point
+void TFT_HX8357::drawCurve3p(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2,
+ uint16_t color) {
+	 int preX=x0;
+	 int preY=y0;
+	 float x=0;
+	// drawPixel(x0,y0,color);
+   while (x<1) {
+	int newX =pow(1-x,2)*x0 + (2*(1-x)*(x*x1))+(pow(x,2)*x2);
+	int newY =(pow(1-x,2)*y0) + (2*(1-x)*(x*y1))+(pow(x,2)*y2) ;
+	drawLine(preX,preY,newX, newY, color);//    P = (1−t)2P1 + 2(1−t)tP2 + t2P3
+	x+=0.1;
+	preX=newX;
+	preY=newY;
+   }
+  drawLine(preX,preY,x2, y2, color); 
+ }
+
+//curve 4 point
+void TFT_HX8357::drawCurve4p(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, int16_t x3, int16_t y3,
+ uint16_t color) {
+	 int preX=x0;
+	 int preY=y0;
+	 float x=0;
+	 //оптимизация
+	 float step = 0.02;//шаг
+	 float d1=sqrt(pow(x1-x0,2)+pow(y1-y0,2));
+	 float d2=sqrt(pow(x2-x1,2)+pow(y2-y1,2));
+	 float d3=sqrt(pow(x3-x2,2)+pow(y3-y2,2));
+	 float sumD=d1+d2+d3;//расстояние между точками задающими кривую
+	 	 if (sumD<20){
+		 step = 0.5;
+		}
+	 	 if (sumD<15){
+		 step = 0.25;
+		}	
+	 	 if (sumD<=10){
+		 step =0.1;
+		}	
+		
+   while (x<1) {
+	int newX=(pow(1-x,3)*x0) + (3*pow(1-x,2)*x*x1)+(3*(1-x))*pow(x,2)*x2+(pow(x,3)*x3);
+	int newY= (pow(1-x,3)*y0) + (3*pow(1-x,2)*x*y1)+(3*(1-x))*pow(x,2)*y2+(pow(x,3)*y3);
+
+	drawLine( preX ,preY ,newX,newY, color);   //   P = (1−t)^3P1 + 3(1−t)2tP2 +3(1−t)t2P3 + t3P4
+	x+=step;
+	preX=newX;
+	preY=newY;
+   }
+     drawLine(preX,preY,x3, y3, color); 
+
+ }
+
 /***************************************************************************************
 ** Function name:           drawCircle
 ** Description:             Draw a circle outline

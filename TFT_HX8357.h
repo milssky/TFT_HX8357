@@ -287,6 +287,10 @@ class TFT_HX8357
            setRotation(uint8_t r),
            invertDisplay(boolean i),
 
+           drawCurve2p(int16_t x0, int16_t y0, int16_t x2, int16_t y2, uint16_t color),
+	         drawCurve3p(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color),
+	         drawCurve4p(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, int16_t x3, int16_t y3, uint16_t color),
+           
            drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color),
            drawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t cornername, uint16_t color),
            fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color),
