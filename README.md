@@ -24,6 +24,7 @@ Have fun!
 
 
 by milssky
+
 Added methods for constructing a Bezier curve by 2, 3, 4 points.
 Usage 
 ```c
