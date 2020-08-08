@@ -21,3 +21,13 @@ This HX8357B based display does appear to have a bug in the silicon of the drive
 http://www.banggood.com/3_0-Inch-320-X-480-TFT-LCD-Display-Module-Support-Arduino-Mega2560-p-963573.html
 
 Have fun!
+
+
+by milssky
+Added methods for constructing a Bezier curve by 2, 3, 4 points.
+Usage 
+```c
+drawCurve2p(int16_t x0, int16_t y0, int16_t x2, int16_t y2, uint16_t color);
+drawCurve3p(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color);
+drawCurve4p(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, int16_t x3, int16_t y3, uint16_t color);
+'''
